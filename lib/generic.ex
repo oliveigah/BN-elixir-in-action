@@ -1,6 +1,8 @@
 defmodule Generic do
   @moduledoc """
   Documentation for `Generic`.
+
+  Contains the documentation for generic modules used in the book Elixir in Action.
   """
 
   @doc """

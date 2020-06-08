@@ -12,7 +12,7 @@ defmodule Generic.MixProject do
       # Docs
       name: "Building Blocks",
       source_url: "https://github.com/oliveiragahenrique/building_blocks",
-      # homepage_url: "http://YOUR_PROJECT_HOMEPAGE",
+      homepage_url: "https://oliveiragahenrique.github.io/building_blocks",
       docs: [
         # The main page in the docs
         main: "Generic",
