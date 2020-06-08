@@ -35,7 +35,7 @@ defmodule Geometry do
 
   This exercise explains the usual pattern that low arity delegates to higher arity functions with some default argument values
 
-  In this case, a square is a subset of rectangles so the area function can be implemented as a rectangle area call with both parameters values equal
+  In this case, a square is a subset of rectangles so the area function can be implemented as a rectangle area call with both parameters having equal values
 
   ## Examples
 
