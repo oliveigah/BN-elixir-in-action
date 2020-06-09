@@ -15,7 +15,7 @@ defmodule Generic.MixProject do
       homepage_url: "https://oliveiragahenrique.github.io/building_blocks",
       docs: [
         # The main page in the docs
-        main: "Generic",
+        main: "Geometry",
         logo: "logo.png",
         extras: ["README.md"]
       ]

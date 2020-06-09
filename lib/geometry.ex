@@ -4,6 +4,12 @@ defmodule Geometry do
 
     Contains the documentation for geometries modules used in the book Elixir in Action 2nd Edition
   """
+  @pi 3.14159
+
+  @spec multiply(number(), number()) :: number()
+  defp multiply(a, b) do
+    a * b
+  end
 
   @doc """
   Calculate the area of a rectangle
@@ -13,7 +19,6 @@ defmodule Geometry do
   This exercise explains the creation and use of a function
 
   ## Examples
-
       iex> Geometry.rectangle_area(3,2)
       6
 
@@ -23,7 +28,7 @@ defmodule Geometry do
 
   @spec rectangle_area(non_neg_integer(), non_neg_integer()) :: non_neg_integer()
   def rectangle_area(a, b) do
-    a * b
+    multiply(a, b)
   end
 
   @spec square_area(non_neg_integer) :: non_neg_integer
@@ -48,4 +53,36 @@ defmodule Geometry do
   def square_area(a) do
     rectangle_area(a, a)
   end
+
+  @doc """
+
+  Calculate the area of a circle
+
+  Book section: 2.3.6
+
+  This exercise explains the usage of module attributes and how to combine functions in docTests. In this case I'm using @pi as a module attribute
+
+  ## Examples
+
+      iex> Geometry.circle_area(3) |> Float.round(2)
+      28.27
+  """
+  @spec circle_area(number()) :: float
+  def circle_area(r), do: r * r * @pi
+
+  @doc """
+
+  Calculate the circunference of a circle
+
+  Book section: 2.3.6
+
+  This exercise explains the usage of module attributes and how to combine functions in docTests. In this case I'm using @pi as a module attribute
+
+  ## Examples
+
+      iex> Geometry.circle_circunference(3) |> Float.round(2)
+      18.85
+  """
+  @spec circle_circunference(number) :: float
+  def circle_circunference(r), do: 2 * r * @pi
 end
