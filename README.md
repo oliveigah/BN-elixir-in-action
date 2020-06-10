@@ -1,6 +1,6 @@
 # Elixir in Action 2nd Edition
 
-This are my personal notes of the book.
+My personal notes of the book.
 
 ## Type System
 
