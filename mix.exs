@@ -3,16 +3,16 @@ defmodule Generic.MixProject do
 
   def project do
     [
-      app: :building_blocks,
+      app: :elixir_in_action,
       version: "0.3.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
 
       # Docs
-      name: "Building Blocks",
-      source_url: "https://github.com/oliveiragahenrique/building_blocks",
-      homepage_url: "https://oliveiragahenrique.github.io/building_blocks",
+      name: "Elixir In Action",
+      source_url: "https://github.com/oliveiragahenrique/elixir_in_action",
+      homepage_url: "https://oliveiragahenrique.github.io/elixir_in_action",
       docs: [
         # The main page in the docs
         main: "Geometry",
