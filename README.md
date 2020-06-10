@@ -1,4 +1,4 @@
-# Elixir in Action 2nd Edition - Chapter 2
+# Elixir in Action 2nd Edition
 This are my personal notes of the book.
 ## Type System
 
