@@ -2,7 +2,7 @@
 
 My personal notes of the book.
 
-## Type System
+## 2.4 Type System
 
 ### 2.4.5 - Data Immutability
 
@@ -146,3 +146,59 @@ iolist = [iolist, " Sparta!"]
 ```
 
 - This recursive build method makes all the insertion operations on the list O(1)
+
+## 2.5 - Operators
+
+- Logical operators works as expected. (eg. `==` | `!=` | `>=` | `||` | `&&`)
+- Strict equality are avaiable just like in JavaScript (eg. `===` | `!==`)
+- Short circtuit operators works as expect. (eg. `||` | `&&`)
+- Unary operator `!` is avaiable and works as expected
+- The pipeline operator `|>` takes the value on the left and passes it as the first argument of the function on the right.
+- Pipeline operator is usefull when dealing with a serie of function transformations on data
+- Most operator are actually functions (eg. `1 + 2` is the same as `Kernel.+(1,2)`)
+- Although anyone should right `Kernel.+(1,2)` but this enable the usage of operator functions in anonymous function using the capture operator `&` and use them on the enumeration and stream functions
+
+## 2.6 - Macros
+
+- Too advanced for now. Let's learn it later. **TODO: Learn more about macros and read the book: Metaprogramming Elixir**
+- One of the most important features in elixir
+- Although it's importance, macros should not be over used. Actually it's considered a bad practice use macros when it is not necessary.
+- "Macros should only be used as a last resort. Remember that explicit is better than implicit. Clear code is better than concise code" Official Elixir Docs
+- Enable the creation of compile-time code transformers
+- Relies on the quote unquote mechanism describe on https://elixir-lang.org/getting-started/meta/quote-and-unquote.html
+- Macros parameters are not resolved as normal function parameters, they actually are quoted, and the result of the macro is a quote too
+- Quote and unquote mechanism works because almost every elixir command can be decomposed as a commom standarzied list structure
+
+## 2.7 - Elixir Runtime (BEAM Fundamentals)
+
+- Elixir runtime is a BEAM instance
+- After the compile and the system's start, Erlang takes full control
+- BEAM is a VM, so like JVM it takes control of the system resources and acts as a middleman between the code and the machine
+
+### 2.7.1 - Modules and Functions
+
+- VM keeps track of all modules loaded in memory
+- When a function is called from a module, first it checks wheter the module is loaded. If not load it. Then, execute the function
+- Although you can write many modules on the same file, when it is compiled each module has it's own Elixir.name_of_the_module.beam file
+- Modules are always compiled even if it is defined on IEX. Just its binary will be sotred on memory instead disk.
+- Manual compiled modules `elixirc source.ex` can be used by elixir tools if they are in the same folder, some code path (defined with `iex -pa my/code/path`)
+- Pure Erlang compiled modules have pretty much the same behavior
+- Pure Erlang modules are Atoms, and because of this have a different naming system. `pure_erlang_module.beam` instead the elixir version `Elixir.elixir_module.beam`
+- At runtime module names are atoms and somewhere on the disk is a module_name.beam file where module_name is the alias of Elixir.module_name
+- Functions can be called dynamically in runtime using the kernel function apply. (eg. `apply(IO, :puts, ["Dynamic call"])`)
+
+### 2.7.2 - How to start the runtime
+
+- IEX:
+  - Used most for casual tests and interact with a on going Elixir system
+  - When the interactive shell is started, the BEAM instance is started underneath too. THe elixir shell takes the input interprets it and show to use the result of the expression that ran on BEAM.
+  - Because of the "interprets" part of the IEX, its important to say that it's not a good idea makes performance tests on the IEX. The production code will always be compiled.
+- Scripts
+  - The `elixir` command can be used to run a single elixir file
+  - All modules are compiled and stored on the memory all other code is interpreted and run on the BEAM that is stopped once is nothing more to run
+  - You can prevent the BEAM to stopped after there is no more code to run with the option `elixir --no-halt script.exs`
+  - This is usefull when your script just load the modules and forward the real work to concurrent tasks
+- Mix tool
+  - Used to manage projects that are composed by multiple source file
+  - Best tool for production ready systems
+  - Have several commands that helps build production ready systems. Such as `mix test` , `mix run`, `mix docs`, `mix compile`, and much more.
