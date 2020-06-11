@@ -17,7 +17,10 @@ defmodule Generic.MixProject do
         # The main page in the docs
         main: "Geometry",
         logo: "logo.png",
-        extras: ["README.md"]
+        extras: [
+          "./lib/chapter_1/chapter_1.md",
+          "./lib/chapter_2/chapter_2.md"
+        ]
       ]
     ]
   end
