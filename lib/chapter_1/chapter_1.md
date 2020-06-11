@@ -1,6 +1,6 @@
 # 1 - Erlang and Elixr
 
-## Erlang
+## 1.1 - Erlang
 
 Erlang is more than a programming language, it is a development platform. It is designed by Ericsson in 1980s to solves the telecom system problems at the time, where properties like reliability, responsiveness, scalability and constant avaiability were imperative.
 
@@ -42,7 +42,7 @@ With BEAM and process, Erlang is able to solve:
 - A complex project can be built relying just on Erlang
 - Despite this, the Erlang built tools may not be enough for the purpose, then you should move for a mainstream tool for the job
 
-## Elixir
+## 1.2 - Elixir
 
 - Elixir enables to write more cleaner and compact code that runs on the BEAM
 - After compile, there is no efficiency gap between the Elixir and Erlang code
@@ -50,7 +50,7 @@ With BEAM and process, Erlang is able to solve:
 - There is not you can do in Erlang that cant be done in Elixir
 - In summary, Elixir is Erlang with more modern syntax and development tolling
 
-## Disavantages
+## 1.3 - Disavantages
 
 - The nature of frequent context switches makes Erlang a not very fast language. It's because the goal is to be reliable, keeps performance predictable and between limits. An Erlang system average response time should not vary much for diffent user load.
 - Not prime tecnology for heavy CPU bound operations
