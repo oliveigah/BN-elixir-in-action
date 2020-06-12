@@ -1,5 +1,93 @@
 # 2 - Building Blocks
 
+## 2.1 - Interactive Shell
+
+- Started by the `iex` command on the console
+- Starts an instance of the BEAM and a interactive Elixir shell
+- You can type almost any elixir code on the shell and it'll work
+- For complex multiline operations you just have to break the expression in lines in some way that it does not form a valid expression until the end.
+
+```elixir
+iex(1)> 2 * (
+...(1)> 3 + 3
+...(1)> ) / 4
+3.0
+```
+
+- Documentation can be accessed in the shell with the command `h` it works for almost everything
+- Almost everything in elixir is an expression with a return value
+
+## 2.2 - Variables
+
+- Dynamic language, so no explicity types. Types of variables are defined by the data within them
+- Variable assigment in Elixir language is called variable binding
+- snake_case is the variable names convention
+- Variable names can contain '?' or '!' eg. `valid_name? = false`
+- By convention variables with '?' are usually boolean values
+- By convention variables with '!' are usually used to variables that can contain exceptions
+- Rebinding doesnt mutate the existing memory value. It just allocate the new value on a new memory location and reassing the symbolic to the new location
+- Garbage collector exists and works as expected, values in memory that can't be reached any more are eligible to the garbage collector
+
+## 2.3 Code Organization
+
+- A typical Elixir program is composed by several small functions
+- Organized group of functions are called Modules
+- The initial project folder structure can be initiated by running the command `mix new project_name`
+- Mix have it owns code formater that can be integrated with modern text editors
+- Comments are done with the '#' character
+
+## 2.3.1 - Modules
+
+- Is a collection of functions. Kind of Java Namespaces.
+- `defmodule` macro creates a module
+- Elixir source files use de .ex extension
+- A single .ex file can contain multiple modules, but a module must be defined in a single file
+- Modules inside modules are accessible by the '.' notation and no special relation is built. Just syntax convenience
+- The character '.' is avaiable to name modules but it is just a syntax convenience. No special relation are built between the modules after the compile.
+- CamelCase is the module name convention
+
+### 2.3.2 - Functions
+
+- Every elixir function must be defined inside a module
+- snake_case is the function name convention
+- As variables the characters '?' and '!' are allowed too
+- By convention variables with '?' are usually used when it returns a boolean values
+- By convention variables with '!' are usually used to fucntions that may rise runtime errors
+- `def` macro is used to create functions
+- Functions with no arguments can have their parentheses ommited in the declaration
+- **There is no explicit return in Elixir, instead the return value of a function is the return value of it last executed expression**
+- This feature almost force the functions to be simple
+- There are some condensed syntax for short functions declarations
+- Parentheses in function calls can be omitted but it is not the convention
+- If a function resides in the same module that it is being called the module name can be ommited
+
+### 2.3.3 - Function Arity
+
+- The arity of a function is the number of parameters it receives
+- The unique identifier of a function is: Module + Name + Arity
+- Functions with the same module and name but different arity are completely different functions, totally independent from one another
+- A usual pattern in Elixir is that lower arity function delegates work to higher arity functions. (eg. Implemented on Geometry module)
+- Default parameter values can be generated with the `//` operator, but remember it generates multiple separate function.
+- Because of it, it is not possible to a function receive a variable number of arguments
+
+### 2.3.4 - Function visibility
+
+- Functions declared using the `def` macro are public and can be called anywhere in the code
+- To create private functions should use `defp` macro, then it'll be accessible only inside the module
+
+### 2.3.5 - Import and Aliasses
+
+- You can always call a public function using the syntax ModuleName.function_name()
+- If you want to ommit the ModuleName part you can `import ModuleName` on the start
+- If you want to "rename" a module you can `alias ModuleName, as: MyModuleName` on the start
+
+### 2.3.6 - Module Attributes
+
+- Used usually as module constants eg. `@pi 3.14` or registered as metadata about the code
+- Constants just exists in compile time, replacing all the references for its value
+- Registered attributes such as `@moduledoc` are kept in the binary and can be accessed at runtime
+- Many Elixir tools knows how to interpret such registered attributes to generate usefull stuffs like intelisense, documentation and type specifications
+
 ## 2.4 Type System
 
 ### 2.4.5 - Data Immutability
@@ -168,7 +256,7 @@ iolist = [iolist, " Sparta!"]
 - Macros parameters are not resolved as normal function parameters, they actually are quoted, and the result of the macro is a quote too
 - Quote and unquote mechanism works because almost every elixir command can be decomposed as a commom standarzied list structure
 
-## 2.7 - Elixir Runtime (BEAM Fundamentals)
+## 2.7 - Elixir Runtime
 
 - Elixir runtime is a BEAM instance
 - After the compile and the system's start, Erlang takes full control

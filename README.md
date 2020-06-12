@@ -1,3 +1,5 @@
 # Elixir in Action 2nd Edition
 
-My personal notes about the book
+My personal notes about the book.
+
+https://oliveiragahenrique.github.io/elixir_in_action
