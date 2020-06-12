@@ -36,7 +36,7 @@ iex(1)> 2 * (
 - Mix have it owns code formater that can be integrated with modern text editors
 - Comments are done with the '#' character
 
-## 2.3.1 - Modules
+### 2.3.1 - Modules
 
 - Is a collection of functions. Kind of Java Namespaces.
 - `defmodule` macro creates a module
