@@ -28,7 +28,7 @@ iex(1)> 2 * (
 - Rebinding doesnt mutate the existing memory value. It just allocate the new value on a new memory location and reassing the symbolic to the new location
 - Garbage collector exists and works as expected, values in memory that can't be reached any more are eligible to the garbage collector
 
-## 2.3 Code Organization
+## 2.3 - Code Organization
 
 - A typical Elixir program is composed by several small functions
 - Organized group of functions are called Modules
@@ -88,7 +88,7 @@ iex(1)> 2 * (
 - Registered attributes such as `@moduledoc` are kept in the binary and can be accessed at runtime
 - Many Elixir tools knows how to interpret such registered attributes to generate usefull stuffs like intelisense, documentation and type specifications
 
-## 2.4 Type System
+## 2.4 - Type System
 
 ### 2.4.5 - Data Immutability
 
