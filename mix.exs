@@ -4,7 +4,7 @@ defmodule Generic.MixProject do
   def project do
     [
       app: :elixir_in_action,
-      version: "0.5.0",
+      version: "0.6.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -19,7 +19,8 @@ defmodule Generic.MixProject do
         logo: "logo.png",
         extras: [
           "./lib/chapter_1/chapter_1.md",
-          "./lib/chapter_2/chapter_2.md"
+          "./lib/chapter_2/chapter_2.md",
+          "./lib/chapter_3/chapter_3.md"
         ]
       ]
     ]
