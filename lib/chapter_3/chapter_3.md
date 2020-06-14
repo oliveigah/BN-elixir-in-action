@@ -120,3 +120,29 @@ iex(22)> {date, _} = {_ , {hour, _ , _ }} = :calendar.local_time()
 ```
 
 ## 3.2 - Matching Functions
+
+- The pattern matching feature is used in the specification of a function arguments
+- This enable a input validation at runtime on function calls
+- For instance if you want a tuple containing 2 elements and receive just a tuple with 1 element the call will raise an error
+- The patter matching feature on function arguments empowers one of the most important Elixir features, multiclause functions
+
+### 3.2.1 - Multiclause functions
+
+- eg. [this module](Chapter3.Geometry.html#area/1)
+- Enable the overload of a function by the specification of multiple clauses
+- When you have multiple functions with the same name and arity, you have a multiclause function
+- When a multiclause function is called, the runtime tries to match all of the clauses in **source code order**, the first one that succeeds executes
+- All the functions are one unique function. Despite the fact that in the source code it appears to be different functions and have completely different implementations, from callers perpespective it is all one unique function.
+- Even the capture operator `&` captures all the clauses
+- Clauses of the same function MUST be always kept together in the source code. Even the compiler emits a warning when it is not
+
+### 3.2.2 - Guards
+
+- eg. [this module](Chapter3.CheckNumber.html#check/1)
+- Guards extends the multiclause behaviour by enabling other conditionals on the clause in adition to the patter matching
+- Not every function can be called from guards, are allowed:
+  - Comparisson operators. eg.`<=`
+  - Boolean operators. eg. `and`
+  - Arithmetic operators. eg. `+`
+  - Type check functions from Kernel module. eg. `is_number/1`
+- If an error occurs during a guard validation, the clause returns false, and the runtime proceeds to the next clause

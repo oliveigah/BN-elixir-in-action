@@ -69,7 +69,7 @@ iex(1)> 2 * (
 - A usual pattern in Elixir is that lower arity function delegates work to higher arity functions. (eg. Implemented on Geometry module)
 - Default parameter values can be generated with the `//` operator, but remember it generates multiple separate function.
 - Because of it, it is not possible to a function receive a variable number of arguments
-- It's possible tho to have function overload with multiclauses functions. See 3.2.1
+- It's possible tho to have function overload with multiclauses functions. See [3.2.1](chapter_3.html#3-2-matching-functions)
 
 ### 2.3.4 - Function visibility
 
@@ -90,6 +90,9 @@ iex(1)> 2 * (
 - Many Elixir tools knows how to interpret such registered attributes to generate usefull stuffs like intelisense, documentation and type specifications
 
 ## 2.4 - Type System
+
+- Elixir types can always be compared with the `>` and `<` operators, even when they are of different types
+- number < atom < reference < fun < port < pid < tuple < map < list < binary
 
 ### 2.4.5 - Data Immutability
 

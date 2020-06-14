@@ -79,7 +79,6 @@ defmodule Chapter2.Geometry do
   This exercise explains the usage of module attributes and how to combine functions in docTests. In this case I'm using @pi as a module attribute
 
   ## Examples
-
       iex> Chapter2.Geometry.circle_circunference(3) |> Float.round(2)
       18.85
   """

@@ -1,4 +1,4 @@
-defmodule GeometryTest do
+defmodule GeometryTest2 do
   use ExUnit.Case
   doctest Chapter2.Geometry
 
