@@ -15,7 +15,7 @@ defmodule Generic.MixProject do
       homepage_url: "https://oliveiragahenrique.github.io/elixir_in_action",
       docs: [
         # The main page in the docs
-        main: "Geometry",
+        main: "chapter_1",
         logo: "logo.png",
         extras: [
           "./lib/chapter_1/chapter_1.md",

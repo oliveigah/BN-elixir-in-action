@@ -1,4 +1,4 @@
-defmodule Generic do
+defmodule Chapter2.Generic do
   @moduledoc """
   Documentation for `Generic`.
 
@@ -10,7 +10,7 @@ defmodule Generic do
 
   ## Examples
 
-      iex> Generic.hello()
+      iex> Chapter2.Generic.hello()
       :world
 
   """

@@ -1,4 +1,4 @@
-defmodule Calculator do
+defmodule Chapter2.Calculator do
   @moduledoc """
     Documentation for 'Calculator'.
 
@@ -14,10 +14,10 @@ defmodule Calculator do
 
   ## Examples
 
-      iex> Calculator.sum(1)
+      iex> Chapter2.Calculator.sum(1)
       1
 
-      iex> Calculator.sum(1,4)
+      iex> Chapter2.Calculator.sum(1,4)
       5
   """
   @spec sum(number, number) :: number
@@ -34,10 +34,10 @@ defmodule Calculator do
 
   ## Examples
 
-      iex> Calculator.division(1,1)
+      iex> Chapter2.Calculator.division(1,1)
       1.0
 
-      iex> Calculator.division(1,4)
+      iex> Chapter2.Calculator.division(1,4)
       0.25
   """
   @spec division(number, number) :: float
@@ -54,10 +54,10 @@ defmodule Calculator do
 
   ## Examples
 
-      iex> Calculator.integer_of_div(1,1)
+      iex> Chapter2.Calculator.integer_of_div(1,1)
       1
 
-      iex> Calculator.integer_of_div(5,2)
+      iex> Chapter2.Calculator.integer_of_div(5,2)
       2
   """
   @spec integer_of_div(integer, integer) :: integer
@@ -74,10 +74,10 @@ defmodule Calculator do
 
   ## Examples
 
-      iex> Calculator.remainder_of_div(1,1)
+      iex> Chapter2.Calculator.remainder_of_div(1,1)
       0
 
-      iex> Calculator.remainder_of_div(1,4)
+      iex> Chapter2.Calculator.remainder_of_div(1,4)
       1
   """
   @spec remainder_of_div(integer, integer) :: integer

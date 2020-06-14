@@ -1,8 +1,8 @@
 defmodule GenericTest do
   use ExUnit.Case
-  doctest Generic
+  doctest Chapter2.Generic
 
   test "greets the world" do
-    assert Generic.hello() == :world
+    assert Chapter2.Generic.hello() == :world
   end
 end

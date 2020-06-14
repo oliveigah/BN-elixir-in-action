@@ -1,4 +1,4 @@
-defmodule Geometry do
+defmodule Chapter2.Geometry do
   @moduledoc """
     Documentation for 'Geometry'.
 
@@ -19,10 +19,10 @@ defmodule Geometry do
   This exercise explains the creation and use of a function
 
   ## Examples
-      iex> Geometry.rectangle_area(3,2)
+      iex> Chapter2.Geometry.rectangle_area(3,2)
       6
 
-      iex> Geometry.rectangle_area(1,7)
+      iex> Chapter2.Geometry.rectangle_area(1,7)
       7
   """
 
@@ -44,10 +44,10 @@ defmodule Geometry do
 
   ## Examples
 
-      iex> Geometry.square_area(3)
+      iex> Chapter2.Geometry.square_area(3)
       9
 
-      iex> Geometry.square_area(7)
+      iex> Chapter2.Geometry.square_area(7)
       49
   """
   def square_area(a) do
@@ -64,7 +64,7 @@ defmodule Geometry do
 
   ## Examples
 
-      iex> Geometry.circle_area(3) |> Float.round(2)
+      iex> Chapter2.Geometry.circle_area(3) |> Float.round(2)
       28.27
   """
   @spec circle_area(number()) :: float
@@ -80,7 +80,7 @@ defmodule Geometry do
 
   ## Examples
 
-      iex> Geometry.circle_circunference(3) |> Float.round(2)
+      iex> Chapter2.Geometry.circle_circunference(3) |> Float.round(2)
       18.85
   """
   @spec circle_circunference(number) :: float
