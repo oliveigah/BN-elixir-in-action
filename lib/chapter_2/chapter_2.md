@@ -1,5 +1,7 @@
 # 2 - Building Blocks
 
+- Everything in Elixir is an expression that has a return value
+
 ## 2.1 - Interactive Shell
 
 - Started by the `iex` command on the console
@@ -144,6 +146,7 @@ Worth to mention that some data copy is always be present, but the benefits of t
 - Lists can be manipulated with List module functions
 - Changes on the tuple does not affect the original data just the references. (Data is always immutable)
 - Lists are recursively composed by head and tail structure
+- This recursive structure are useful in many real use cases. eg. [this function](Chapter3.ListHelper.html#sum/1)
 - Because of this, insert a new element on the begining of a list is O(1) while insert on the end is always O(n)
 
 ### 2.4.6 - Maps

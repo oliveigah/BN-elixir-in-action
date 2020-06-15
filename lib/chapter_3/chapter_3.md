@@ -128,7 +128,7 @@ iex(22)> {date, _} = {_ , {hour, _ , _ }} = :calendar.local_time()
 
 ### 3.2.1 - Multiclause functions
 
-- eg. [this module](Chapter3.Geometry.html#area/1)
+- eg. [this function](Chapter3.Geometry.html#area/1)
 - Enable the overload of a function by the specification of multiple clauses
 - When you have multiple functions with the same name and arity, you have a multiclause function
 - When a multiclause function is called, the runtime tries to match all of the clauses in **source code order**, the first one that succeeds executes
@@ -138,7 +138,7 @@ iex(22)> {date, _} = {_ , {hour, _ , _ }} = :calendar.local_time()
 
 ### 3.2.2 - Guards
 
-- eg. [this module](Chapter3.CheckNumber.html#check/1)
+- eg. [this function](Chapter3.CheckNumber.html#check/1)
 - Guards extends the multiclause behaviour by enabling other conditionals on the clause in adition to the patter matching
 - Not every function can be called from guards, are allowed:
   - Comparisson operators. eg.`<=`
@@ -146,3 +146,54 @@ iex(22)> {date, _} = {_ , {hour, _ , _ }} = :calendar.local_time()
   - Arithmetic operators. eg. `+`
   - Type check functions from Kernel module. eg. `is_number/1`
 - If an error occurs during a guard validation, the clause returns false, and the runtime proceeds to the next clause
+
+## 3.3 - Conditionals
+
+### 3.3.1 - Multiclause branching
+
+- eg. [this function](Chapter3.ListHelper.html#sum/1)
+- As seen, patter matching on multiclause functions can be used to build conditionals that are applied on inputs parameters
+
+### 3.3.2 - Classical branching
+
+- If
+
+  ```elixir
+  iex(1)> if true, do:
+  ...(1)> "Success",
+  ...(1)> else:
+  ...(1)> "Failure"
+          "Success"
+  ```
+
+  - Works as expected
+  - One-liners can be done as `if condition, do: somehting_to_do, else: another_thing_to_do`
+  - The return value of an if statement is the return valur of the executed block, if no block is executed the result is `nil`
+
+- Unless
+
+  - same as `if(!condition)`
+
+- Cond
+
+  - eg. [this function](Chapter3.CheckNumber.html#cond_check/1)
+  - Can be explained as if else if
+  - The first condition that is true has its code executed
+  - If no condition is valid, raises an error
+
+- Case
+
+  - Similar to switch-case on mainstream languages
+  - Uses patter matching instead of simple bollean expressions
+  - The first pattern that is matched has its code executed
+  - If no pattern is matched, raises an error
+  - Can serve as a substitute to multiclause functions on simple tasks
+
+  ### 3.3.3 - The With Special Form
+
+  - eg. [this function](Chapter3.MapHelper.html#normalize_user!/1)
+  - Useful to chain pattern matching expressions and return the result value of the first one that fails
+  - If all clauses are matched the do block is executed
+  - Guards can be used on patterns as well
+  - All variables declared inside `with` are restricted to that scope
+  - An `else` block can be used in case of failures
