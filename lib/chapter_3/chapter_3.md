@@ -197,3 +197,30 @@ iex(22)> {date, _} = {_ , {hour, _ , _ }} = :calendar.local_time()
   - Guards can be used on patterns as well
   - All variables declared inside `with` are restricted to that scope
   - An `else` block can be used in case of failures
+
+## 3.4 - Loops and Iterations
+
+- Definitely doesn't work as expected
+- The unique looping tool in Elixir is recursion
+- Other high-order functions that are usefull to do iterations are built in on top of recursions
+- Although recursion is the main loop building block, high-order functions provide abstractions to deal with it for recorrent simple tasks
+
+### 3.4.1 - Iterating With Recursion
+
+- eg. [this function](Chapter3.ListHelper.html#non_tail_range/2)
+- Usually are built with multi-clause functions. eg. [this function](Chapter3.ListHelper.html#sum/1)
+- First clause is the recursion stop condition and the other clauses the general cases
+- The usual memory problem with long recursions is solved in Elixir by tail-call optimization
+
+### 3.4.2 - Tail Function Calls
+
+- eg. [function 1](Chapter3.ListHelper.html#tail_len/1) | [function 2](Chapter3.ListHelper.html#tail_positives/1) | [function 3](Chapter3.ListHelper.html#tail_range/2)
+- A tail call happens when the last expression of a function (it's return value) is a call to another function(even it self, in case of recursive tail functions)
+- A tail calls works with any branching constructs such as `if` or `cond`
+- If the last expression is something like `1 + call_to_a_func()` this is not a tail
+- The optimization consists in instead of make a stack push for new function calls something like a goto occurs
+- This is possible because since the function final value is the value of the next function being called, no context needs to be stored for later computation
+- This feature is especially good in recursive functions, since recursive calls don't allocate extra memory a recursive tail function can run, virtually, forever
+- This kind of function is the appropriate solution for large iterations
+- Tail recursions are kind of the substitutes for traditional loops, it have an accumulator, an iteration step on the general cases clauses and the stop condition on the first clause
+- The downside is that sometimes the classical recursion is more elegant solution than the tail recursion, so it is a matter of readabillity x performance

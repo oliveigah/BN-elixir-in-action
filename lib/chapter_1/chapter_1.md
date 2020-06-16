@@ -1,4 +1,4 @@
-# 1 - Erlang and Elixr
+# 1 - Erlang and Elixir
 
 ## 1.1 - Erlang
 
