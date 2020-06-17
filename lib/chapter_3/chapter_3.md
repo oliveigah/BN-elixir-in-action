@@ -224,3 +224,6 @@ iex(22)> {date, _} = {_ , {hour, _ , _ }} = :calendar.local_time()
 - This kind of function is the appropriate solution for large iterations
 - Tail recursions are kind of the substitutes for traditional loops, it have an accumulator, an iteration step on the general cases clauses and the stop condition on the first clause
 - The downside is that sometimes the classical recursion is more elegant solution than the tail recursion, so it is a matter of readabillity x performance
+
+### 3.4.3 - Higher Order Functions
+- WIP
