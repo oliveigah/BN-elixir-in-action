@@ -15,6 +15,7 @@
 - Can be recursivelly nested
 - On the left is the pattern and on the right is the term
 - Variables on the pattern are bound to term values
+- Functions arguments are patterns
 
 ### 3.1.1 - Match Operator
 
@@ -226,4 +227,34 @@ iex(22)> {date, _} = {_ , {hour, _ , _ }} = :calendar.local_time()
 - The downside is that sometimes the classical recursion is more elegant solution than the tail recursion, so it is a matter of readabillity x performance
 
 ### 3.4.3 - Higher Order Functions
-- WIP
+
+- This kind of functions abstract the recursion complexity, but in the end it's all recursion
+- By definition, a higher-order function is a function that do at least one of this 2 things:
+  - Takes one or more functions as input
+  - Returns one or more functions
+- `Enum` is the goto module to work with enumerables
+- `Enum` has similar functions as JavaScript Array Prototype that works on all enumerable types on elixir
+- The capture operador `&` is very usefull to declare simple functions as parameters to highorder functions. eg. [this function](Chapter3.FileHelper.html#words_per_line!/1)
+
+### 3.4.4 - Comprehensions
+
+```elixir
+iex> for i <- [:a, :b, :c], j <- [1, 2], do:  {i, j}
+[a: 1, a: 2, b: 1, b: 2, c: 1, c: 2]
+```
+
+- Kind of a python `for` but with some different syntax
+- `i <- [:a, :b, :c]` is the generator term
+- Multiples generator can be nested to simulate a nested loop
+- Some problems has a more elegant solution when written wih comprehension, especially cross-join problems
+
+### 3.4.5 - Streams
+
+- `Stream` is a special type of enumerable, it is a lazy enumerable
+- The functions of `Stream` module usually receives any enumerable as an entry and returns a stream
+- A stream is kind of a description of the operations that when executed will produce the result
+- It means that the values are generated only when requested, and not before hand, this has 2 major benefits:
+  - Memory optimization: Since all the operations can be applied 1 element a time, the whole list is never on the memory
+  - Iterations optimization: Series of transformations can be done with a single iteration over the list instead of many
+- This laziness property are very usefull when the problem demands multiple transformations on a large list. eg. [this module](Chapter3.FileHelper.html#content)
+- The laziness is so deep that you can even calculate values one by one with the function `Enum.take/2`
