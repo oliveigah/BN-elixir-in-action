@@ -20,7 +20,19 @@ defmodule Generic.MixProject do
         extras: [
           "./lib/chapter_1/chapter_1.md",
           "./lib/chapter_2/chapter_2.md",
-          "./lib/chapter_3/chapter_3.md"
+          "./lib/chapter_3/chapter_3.md",
+          "./lib/chapter_4/chapter_4.md"
+        ],
+        groups_for_modules: [
+          "Chapter 2": [Chapter2.Calculator, Chapter2.Generic, Chapter2.Geometry],
+          "Chapter 3": [
+            Chapter3.CheckNumber,
+            Chapter3.FileHelper,
+            Chapter3.Geometry,
+            Chapter3.ListHelper,
+            Chapter3.MapHelper
+          ],
+          "Chapter 4": [Chapter4.Fraction]
         ]
       ]
     ]
