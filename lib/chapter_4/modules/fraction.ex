@@ -1,10 +1,13 @@
 defmodule Chapter4.Fraction do
   @moduledoc """
-    This module explains how to use `struct` and apply pattern matching with it
+    This module explains how to build higher level data structures with built-in types and how to use `struct` and apply pattern matching with it
 
     Book Section 4.1
   """
-  @type fraction() :: %Chapter4.Fraction{}
+  @typedoc """
+  In this example, the struct `fraction` is built with the built-in type `map`. Because of the usage of `struct` it is slight different of a conventional map, but most functions from the `Map` module will work with it
+  """
+  @type fraction() :: %Chapter4.Fraction{numerator: number(), denominator: number()}
   defstruct numerator: nil, denominator: nil
 
   @spec new(integer(), integer()) :: Chapter4.Fraction.fraction()

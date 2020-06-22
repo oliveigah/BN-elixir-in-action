@@ -1,8 +1,6 @@
 defmodule Chapter3.ListHelper do
   @moduledoc """
-    This module explains:
-    - How pattern macthing and multiclause functions are powerfull tools to build recursive functions
-    - How use tail and non-tail recursions to build iterations
+    This module explains how pattern macthing and multiclause functions are powerfull tools to build recursive functions and how use tail and non-tail recursions to build iterations
 
     Book section: 3.3 and 3.4
   """

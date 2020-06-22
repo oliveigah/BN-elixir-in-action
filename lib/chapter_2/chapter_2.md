@@ -183,7 +183,8 @@ Worth to mention that some data copy is always be present, but the benefits of t
 
 ### 2.4.9 - Functions
 
-- Anonymous functions are allowed, but the convention to write is different from the named functions. Their parameters dont have parentheses. **TODO: Why is this important? It'll be explain on chapter 3. Complement this topic when learn it**
+- Anonymous functions are allowed, but the convention to write is different from the named functions. Their parameters dont have parentheses.
+- This is important because on multiclauses lambdas all the clauses are listed below it, so it is cleaner to do so
 - For code clarity purpose when an anonymous function is called it need to be called with a `.` (eg. `anonymous_func.(param1, param2)`)
 - The fact that functions can be stored in variables allow to them be passed as arguments to parameterize generic logic. Similar to Javascript callback functions on methods like Array.forEach
 - The capture operator `&` is used to simplify the code, diminishing the noisy, because with it there is no need to create a trivial function that just foward values to another function without any real logic
