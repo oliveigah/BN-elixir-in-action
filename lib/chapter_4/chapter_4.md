@@ -50,3 +50,11 @@ eg. [this module](Chapter4.Fraction.html#content)
 - This data transparency is useful for debugs purpose
 - Despite this, as a module's client you should not rely on the internal data structure representation
 - The only guarantee of these abstraction modules is that the functions will work if an instance of a proper data structure is sent as an entry
+
+## 4.2 - Hierarchical Data
+
+- Because of the immutable nature of data the updates on hierarchical data has to be done by update the specific field and then all of the parents recursively
+- Usually it is done with several simple functions, wich one responsible for a specific part of the update and the more specific functions delegates to the more general ones
+- Instead of doing these several functions, the macro `put_in/2` is avaiable for this purpose
+- There are similar macros for retrieving data too. eg. `get_in/2`
+- These kind of macros relies on the `Access` module
