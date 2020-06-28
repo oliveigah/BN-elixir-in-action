@@ -58,3 +58,67 @@ eg. [this module](Chapter4.Fraction.html#content)
 - Instead of doing these several functions, the macro `put_in/2` is avaiable for this purpose
 - There are similar macros for retrieving data too. eg. `get_in/2`
 - These kind of macros relies on the `Access` module
+
+## 4.3 - Polymorphism With Protocols
+
+- The basic way of doing polymorphism in elixir is with protocols
+
+### 4.3.1 - Protocol Basics
+
+- A protocol is kind of a OO interface
+- It is a module where a functions is declared but not implemented
+
+```elixir
+defprotocol String.Chars do
+  def to_string(thing)
+end
+```
+
+- Data types that implements the protocol can use all the functions defined by it
+- If protocol function is called with some data type that does not implement the protocol, an error is raised
+
+### 4.3.2 - Implementing Protocols
+
+```elixir
+## Code of the TodoList project
+defimpl String.Chars, for: TodoList do
+  def to_string(todo_list) do
+    "You have #{todo_list.auto_id - 1} tasks to do"
+  end
+end
+```
+
+- Elixir most basic functions relies on protocol
+- Each protocol has it's own set of functions that must be implemented
+- `defimpl` macro is used to start the implementation
+- In `defimpl` you must specify wich protocol will be implemented and the corresponding data type
+- On the do-end block are the specific funtions implementations
+- Protocols implementations do not need to be part of any specific module
+- Because of it, you can implement protocols even for data types that you don't have access to the source code
+
+### Built-in Protocols
+
+```elixir
+## Code of the TodoList project
+defimpl Collectable, for: TodoList do
+  def into(original) do
+    {original, &into_callback/2}
+  end
+
+  defp into_callback(todo_list, {:cont, entry}) do
+    TodoList.add_entry(todo_list, entry)
+  end
+
+  defp into_callback(todo_list, :done) do
+    todo_list
+  end
+
+  defp into_callback(_, :halt) do
+    :ok
+  end
+end
+```
+
+- Elixir have some built-in protocols that are very useful, check docs for details. eg. `Enumerable`,`Collectable`,`Stream`
+- By implementing the `Enumerable` protocol, your high level data structure gain access to all the `Enum` functions for free
+- Besides built-in protocols you can build your own protocols
