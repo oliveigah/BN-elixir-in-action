@@ -4,7 +4,7 @@ defmodule Generic.MixProject do
   def project do
     [
       app: :elixir_in_action,
-      version: "0.1.6",
+      version: "0.2.1",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -21,7 +21,8 @@ defmodule Generic.MixProject do
           "./lib/chapter_1/chapter_1.md",
           "./lib/chapter_2/chapter_2.md",
           "./lib/chapter_3/chapter_3.md",
-          "./lib/chapter_4/chapter_4.md"
+          "./lib/chapter_4/chapter_4.md",
+          "./lib/chapter_5/chapter_5.md"
         ],
         groups_for_modules: [
           "Chapter 2": [Chapter2.Calculator, Chapter2.Generic, Chapter2.Geometry],
@@ -32,7 +33,8 @@ defmodule Generic.MixProject do
             Chapter3.ListHelper,
             Chapter3.MapHelper
           ],
-          "Chapter 4": [Chapter4.Fraction]
+          "Chapter 4": [Chapter4.Fraction],
+          "Chapter 5": [Chapter5.QueryHelper]
         ]
       ]
     ]
