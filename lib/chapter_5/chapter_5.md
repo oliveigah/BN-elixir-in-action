@@ -52,3 +52,47 @@
 - To set a kind of timeout use the `after` macro, this way the process will not wait forever
 - Receive messages takes no action from the receiver, so no block or interrupt happens
 - Because of concurrency, order among messages is not a guarantee
+
+## 5.3 - Stateful Server Process
+
+- Beyond do async work, process can manage CPU bound operations too and being used to manipulate data
+- Server process works kind of OO objects. They have a state that could be manipulated overtime
+- Since processes are concurrent, multiple objects can run at the "same time"
+
+### 5.3.1 - Server Process
+
+- It is a process that run indefinitely and can handle messages, kind of an end-point
+- Server processes are kept alive indefinitely by a [tail loop recursion](chapter_3.html#3-4-loops-and-iterations). eg. [this function](Chapter5.DatabaseServer.html#start/0)
+- The loop, waits for a message to handle, when received handle it and goes back to wait the next message
+- Wait for a message do not consume any CPU
+- Server processes have 2 type of functions
+  - Interface functions: Functions that are public and are called by the clients, the code inside these functions is executed on the client so functions like `self/0` are evaluated with the client pid. These functions are usefull to abstract implementation details and communication protocols away from the client. eg. [this function](Chapter5.Calculator.html#get_result/1)
+  - Implementation functions: Functions that are private and always run on the server, these functions are responsible for the implementation details it self. eg. [this function](Chapter5.Calculator.html#loop/1)
+- There is no relation between modules and processes, functions from the same module can run in different process, such as the interface x implementation example above
+- `GenServer` can be used to simplify the development of server processes
+- Server processes are internally sequential, this means that all the messages send to it will be handle in order, one at a time
+- Because of this feature, a server process can be considered as a sync point. Use it when multiple actions needs to happen in a sync manner
+- This sync feature can be bad sometimes(eg. database server), so to get around it you just have to start multiple servers, kind of a pool, and paralelize everything that you could
+
+### 5.3.2 - Immutable State
+
+- [this module](Chapter5.DatabaseServer.html#content)
+- The state is passed through the loop function parameters
+
+### 5.3.3 - Mutable State
+
+- [this module](Chapter5.Calculator.html#content)
+- The state is passed through the loop function parameters and changed by the message handler functions
+- This aproach can feels like an mutable data structure, but it is not
+- Pure functional abstractions are used inside the server process to handle all the requests
+- In this way, the server process is just a controller of a pure functional abstraction that can be manipulated by other processes
+
+### 5.3.4 - Complex State
+
+- Same as mutable state, but the handle functions pass more complex data to the loop
+
+### 5.3.5 - Registered Processes
+
+- Server process can have a local inside a BEAM instance
+- This name enable a simplification of the server process interface by removing the server pid repetition on the interface functions
+- This is done by `Process.register/2`
