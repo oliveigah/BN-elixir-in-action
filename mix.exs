@@ -22,7 +22,8 @@ defmodule Generic.MixProject do
           "./lib/chapter_2/chapter_2.md",
           "./lib/chapter_3/chapter_3.md",
           "./lib/chapter_4/chapter_4.md",
-          "./lib/chapter_5/chapter_5.md"
+          "./lib/chapter_5/chapter_5.md",
+          "./lib/chapter_6/chapter_6.md"
         ],
         groups_for_modules: [
           "Chapter 2": [Chapter2.Calculator, Chapter2.Generic, Chapter2.Geometry],
@@ -34,7 +35,8 @@ defmodule Generic.MixProject do
             Chapter3.MapHelper
           ],
           "Chapter 4": [Chapter4.Fraction],
-          "Chapter 5": [Chapter5.QueryHelper, Chapter5.Calculator, Chapter5.DatabaseServer]
+          "Chapter 5": [Chapter5.QueryHelper, Chapter5.Calculator, Chapter5.DatabaseServer],
+          "Chapter 6": [Chapter6.ServerProcess, Chapter6.KeyValueStore]
         ]
       ]
     ]
