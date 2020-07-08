@@ -4,7 +4,7 @@ defmodule Generic.MixProject do
   def project do
     [
       app: :elixir_in_action,
-      version: "0.2.8",
+      version: "0.0.5",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -36,7 +36,7 @@ defmodule Generic.MixProject do
           ],
           "Chapter 4": [Chapter4.Fraction],
           "Chapter 5": [Chapter5.QueryHelper, Chapter5.Calculator, Chapter5.DatabaseServer],
-          "Chapter 6": [Chapter6.ServerProcess, Chapter6.KeyValueStore]
+          "Chapter 6": [Chapter6.ServerProcess, Chapter6.KeyValueStore, Chapter6.StackServer]
         ]
       ]
     ]
