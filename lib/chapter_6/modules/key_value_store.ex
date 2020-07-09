@@ -1,115 +1,104 @@
 defmodule Chapter6.KeyValueStore do
   @moduledoc """
-    This module explains how to build a concrete module that relies on a generic server implementation
-    - The concrete module relies on functions such as `Chapter6.ServerProcess.start/1`, `Chapter6.ServerProcess.cast/2` and `Chapter6.ServerProcess.call/2` to implement a server process with no boilerplate
-    - The clarity of the code using a GenServer abstraction is way higher
+    This module explains how to build a module that relies on `GenServer`
+    - The basic approach is similiar to the `Chapter6.MyKeyValueStore`
+    - This callback module must implement a set of functions in order to be compatible with `GenServer`
 
-    Book section: 6.1
+    Book section: 6.2
   """
+  use GenServer
 
   @doc """
   Starts the server process
 
-  - This function relies in `Chapter6.ServerProcess.start/1`
+  - This function relies in `GenServer.start/3`
 
-  Book section: 6.1.3
+  Book section: 6.2.2
 
   ## Examples
-      iex> pid = Chapter6.KeyValueStore.start()
+      iex> {:ok, pid} = Chapter6.KeyValueStore.start()
       iex> is_pid(pid)
       true
   """
-  def start do
-    Chapter6.ServerProcess.start(Chapter6.KeyValueStore)
+  def start() do
+    GenServer.start(Chapter6.KeyValueStore, nil)
   end
 
-  @spec put(pid, any, any) :: any
   @doc """
   Add a key/value pair asynchronously
 
-  - If a function should be running asynchronously, it must use the `Chapter6.ServerProcess.cast/2` function
+  - If a function should be running asynchronously, it must use the `GenServer.cast/2` function
 
-  Book section: 6.1.3
+  Book section: 6.2.3
 
   ## Examples
-      iex> pid = Chapter6.KeyValueStore.start()
+      iex> {:ok, pid} = Chapter6.KeyValueStore.start()
       iex> Chapter6.KeyValueStore.put(pid, :first, "value")
       iex> Chapter6.KeyValueStore.get(pid, :first)
       "value"
   """
-  def put(pid, key, value) do
-    Chapter6.ServerProcess.cast(pid, {:put, key, value})
+  def put(server_pid, key, value) do
+    GenServer.cast(server_pid, {:put, key, value})
   end
 
-  @spec get(pid, any) :: any
   @doc """
   Get the value referenced by a specific key synchronously
 
-  - If a function should be running synchronously, it must use the `Chapter6.ServerProcess.call/2` function
+  - If a function should be running synchronously, it must use the `GenServer.call/2` function
 
-  Book section: 6.1.3
+  Book section: 6.2.3
 
   ## Examples
-      iex> pid = Chapter6.KeyValueStore.start()
+      iex> {:ok, pid} = Chapter6.KeyValueStore.start()
       iex> Chapter6.KeyValueStore.put(pid, :first, "value")
       iex> Chapter6.KeyValueStore.get(pid, :first)
       "value"
+
+      iex> {:ok, pid} = Chapter6.KeyValueStore.start()
+      iex> Chapter6.KeyValueStore.get(pid, :first)
+      nil
   """
-  def get(pid, key) do
-    Chapter6.ServerProcess.call(pid, {:get, key})
+  def get(server_pid, key) do
+    GenServer.call(server_pid, {:get, key})
   end
 
-  @spec init :: %{}
   @doc """
-  Return the initial state of the server
+  Initialize the server
 
-  - This function is used inside the `Chapter6.ServerProcess.start/1` implementation to set the initial state of the server process
+  - The function `:timer.send_interval` is used to send a periodically request to the server
 
-  Book section: 6.1.3
-
-  ## Examples
-      iex> pid = Chapter6.KeyValueStore.init()
-      %{}
+  Book section: 6.2.4
   """
-  def init do
-    %{}
+  @impl GenServer
+  def init(_args) do
+    :timer.send_interval(5000, :cleanup)
+    {:ok, %{}}
   end
 
-  @spec handle_cast({:put, any, any}, map) :: map
-  @doc """
-  Handle an async put message
+  @doc false
+  @impl GenServer
+  def handle_call({:get, key}, _from, %{} = state) do
+    response = Map.get(state, key)
+    {:reply, response, state}
+  end
 
-  - The return of the handle_cast functions implementations should always be the new state value
-
-  Book section: 6.1.4
-
-  ## Examples
-      iex> Chapter6.KeyValueStore.handle_cast({:put, :key, "value"}, %{})
-      %{key: "value"}
-
-      iex> Chapter6.KeyValueStore.handle_cast({:put, :key, "value"}, %{other_key: "other_value"})
-      %{key: "value", other_key: "other_value"}
-  """
+  @doc false
+  @impl GenServer
   def handle_cast({:put, key, value}, state) do
-    Map.put(state, key, value)
+    new_state = Map.put(state, key, value)
+    {:noreply, new_state}
   end
 
-  @spec handle_call({:get, any}, map) :: {any, map}
+  @impl GenServer
   @doc """
-  Handle a sync get message
+  Handle generic custom calls to the server
 
-  - The return of the handle_cast functions implementations should always be in the same format that the abstraction expects `{result, new_state}`
+  - Any message that arrives to the server that do not fall into one of the 2 categories, cast or call will be handled by this function
 
-  Book section: 6.1.3
-
-  ## Examples
-      iex> Chapter6.KeyValueStore.handle_call({:get, :key} , %{key: "value"})
-      {"value", %{key: "value"}}
-
-      iex> Chapter6.KeyValueStore.handle_call({:get, :key} , %{})
-      {nil, %{}}
+  Book section: 6.2.4
   """
-  def handle_call({:get, key}, state) do
-    {Map.get(state, key), state}
+  def handle_info(:cleanup, state) do
+    IO.puts("performing cleanup...")
+    {:noreply, state}
   end
 end

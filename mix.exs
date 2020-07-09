@@ -11,8 +11,8 @@ defmodule Generic.MixProject do
 
       # Docs
       name: "Elixir In Action",
-      source_url: "https://github.com/oliveiragahenrique/elixir_in_action",
-      homepage_url: "https://oliveiragahenrique.github.io/elixir_in_action",
+      source_url: "https://github.com/oliveigah/elixir_in_action",
+      homepage_url: "https://oliveigah.github.io/elixir_in_action",
       docs: [
         # The main page in the docs
         main: "chapter_1",
@@ -36,7 +36,12 @@ defmodule Generic.MixProject do
           ],
           "Chapter 4": [Chapter4.Fraction],
           "Chapter 5": [Chapter5.QueryHelper, Chapter5.Calculator, Chapter5.DatabaseServer],
-          "Chapter 6": [Chapter6.ServerProcess, Chapter6.KeyValueStore, Chapter6.StackServer]
+          "Chapter 6": [
+            Chapter6.MyServerProcess,
+            Chapter6.MyKeyValueStore,
+            Chapter6.MyStackServer,
+            Chapter6.KeyValueStore
+          ]
         ]
       ]
     ]

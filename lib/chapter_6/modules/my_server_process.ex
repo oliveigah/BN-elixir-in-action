@@ -1,4 +1,4 @@
-defmodule Chapter6.ServerProcess do
+defmodule Chapter6.MyServerProcess do
   @moduledoc """
     This module explains how to build a generic server process that abstracts implementation details to build a server process
     - A concrete module will be provided by dependency injection to fill the specific implementation but all the flow of control will be managed by this process
@@ -17,7 +17,7 @@ defmodule Chapter6.ServerProcess do
   Book section: 6.1.1
 
   ## Examples
-      iex> pid = Chapter6.ServerProcess.start(Chapter6.StackServer)
+      iex> pid = Chapter6.MyServerProcess.start(Chapter6.MyStackServer)
       iex> is_pid(pid)
       true
   """
@@ -33,18 +33,18 @@ defmodule Chapter6.ServerProcess do
   Make a call to the server process and await for it response
 
   - This function will handle all the requests to the concrete server that the client want to know the result
-  - The concrete function must call this function always that a interface function should run synchronously. eg.[this function](Chapter6.StackServer.html#get/1)
+  - The concrete function must call this function always that a interface function should run synchronously. eg.[this function](Chapter6.MyStackServer.html#get/1)
 
   Book section: 6.1.2
 
   ## Examples
-    iex> pid = Chapter6.StackServer.start()
-    iex> Chapter6.StackServer.put(pid, "first")
-    iex> Chapter6.ServerProcess.call(pid, {:get})
+    iex> pid = Chapter6.MyStackServer.start()
+    iex> Chapter6.MyStackServer.put(pid, "first")
+    iex> Chapter6.MyServerProcess.call(pid, {:get})
     "first"
 
-    iex> pid = Chapter6.StackServer.start()
-    iex> Chapter6.ServerProcess.call(pid, {:get})
+    iex> pid = Chapter6.MyStackServer.start()
+    iex> Chapter6.MyServerProcess.call(pid, {:get})
     :stack_is_empty
   """
   def call(server_pid, request) do
@@ -60,13 +60,13 @@ defmodule Chapter6.ServerProcess do
   Make a call to the server process and do not wait for it response
 
   - This function will handle all the requests to the concrete server that the client do not want to know the result
-  - The concrete function must call this function always that a interface function should run asynchronously. eg.[this function](Chapter6.StackServer.html#put/2)
+  - The concrete function must call this function always that a interface function should run asynchronously. eg.[this function](Chapter6.MyStackServer.html#put/2)
 
   Book section: 6.1.4
 
   ## Examples
-    iex> pid = Chapter6.StackServer.start()
-    iex> Chapter6.ServerProcess.cast(pid, {:put, "first"})
+    iex> pid = Chapter6.MyStackServer.start()
+    iex> Chapter6.MyServerProcess.cast(pid, {:put, "first"})
     {:cast, {:put, "first"}}
   """
   def cast(server_pid, request) do
