@@ -4,7 +4,7 @@ defmodule Generic.MixProject do
   def project do
     [
       app: :elixir_in_action,
-      version: "0.0.6",
+      version: "0.0.7",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -23,7 +23,8 @@ defmodule Generic.MixProject do
           "./lib/chapter_3/chapter_3.md",
           "./lib/chapter_4/chapter_4.md",
           "./lib/chapter_5/chapter_5.md",
-          "./lib/chapter_6/chapter_6.md"
+          "./lib/chapter_6/chapter_6.md",
+          "./lib/chapter_7/chapter_7.md"
         ],
         groups_for_modules: [
           "Chapter 2": [Chapter2.Calculator, Chapter2.Generic, Chapter2.Geometry],
@@ -57,9 +58,9 @@ defmodule Generic.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.22", only: :dev, runtime: false}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false}
     ]
   end
 end
