@@ -2,4 +2,4 @@
 
 My personal notes about the book.
 
-https://oliveiragahenrique.github.io/elixir_in_action
+https://oliveigah.github.io/elixir_in_action
