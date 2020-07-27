@@ -24,7 +24,8 @@ defmodule Generic.MixProject do
           "./lib/chapter_4/chapter_4.md",
           "./lib/chapter_5/chapter_5.md",
           "./lib/chapter_6/chapter_6.md",
-          "./lib/chapter_7/chapter_7.md"
+          "./lib/chapter_7/chapter_7.md",
+          "./lib/chapter_8/chapter_8.md"
         ],
         groups_for_modules: [
           "Chapter 2": [Chapter2.Calculator, Chapter2.Generic, Chapter2.Geometry],
