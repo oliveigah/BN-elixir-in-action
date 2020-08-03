@@ -103,9 +103,11 @@ end
 ### 8.3.1 - Child Specification
 
 - In order to know how to work with each child the supervisor must know 3 things:
+
   - How should child be initialized
   - What should be dont if the child terminates
   - How to uniquely distinguish each child
+
 - All these information is the child specification. eg:
 
 ```elixir
