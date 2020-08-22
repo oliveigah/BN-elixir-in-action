@@ -13,10 +13,6 @@ defmodule Chapter5.QueryHelper do
   - A deep copy of every data passed to `spawn/1` is send to the new process
 
   Book section: 5.2.1
-
-  ## Examples
-      iex> is_pid(Chapter5.QueryHelper.execute_query_on_another_process("query"))
-      true
   """
   def execute_query_on_another_process(query_text) do
     caller = self()
@@ -40,13 +36,6 @@ defmodule Chapter5.QueryHelper do
   - This function takes `2 * length(list)` seconds to execute
 
   Book section: 5.2.1
-
-  ## Examples
-      iex> Chapter5.QueryHelper.run_queries_sync(["query1", "query2"])
-      ["query1 result", "query2 result"]
-
-      iex> Chapter5.QueryHelper.run_queries_sync([])
-      []
   """
   def run_queries_sync(queries_list) do
     Enum.map(queries_list, &execute_query/1)
@@ -59,13 +48,6 @@ defmodule Chapter5.QueryHelper do
   - Although, it does not return the queries results, it returns a list of pids
 
   Book section: 5.2.2
-
-  ## Examples
-      iex> Enum.map(Chapter5.QueryHelper.run_queries_async(["query1", "query2"]), &is_pid/1)
-      [true, true]
-
-      iex> Chapter5.QueryHelper.run_queries_async([])
-      []
   """
   def run_queries_async(queries_list) do
     Enum.map(queries_list, &execute_query_on_another_process/1)
@@ -77,11 +59,6 @@ defmodule Chapter5.QueryHelper do
   - To prevent being stuck if no message has arrived, the clause `after` is used. Kind of a timeout
 
   Book section: 5.2.2
-
-  ## Examples
-      iex> Chapter5.QueryHelper.run_queries_async(["query1"])
-      iex> Chapter5.QueryHelper.get_some_result_from_inbox()
-      "query1 result"
 
   """
   def get_some_result_from_inbox() do

@@ -12,21 +12,22 @@ defmodule Generic.MixProject do
       # Docs
       name: "Elixir In Action",
       source_url: "https://github.com/oliveigah/elixir_in_action",
-      homepage_url: "https://oliveigah.github.io/elixir_in_action",
+      homepage_url: "https://techfromscratch.com.br/elixir_in_action",
       docs: [
         # The main page in the docs
         main: "chapter_1",
         logo: "logo.png",
         extras: [
-          "./lib/chapter_1/chapter_1.md",
-          "./lib/chapter_2/chapter_2.md",
-          "./lib/chapter_3/chapter_3.md",
-          "./lib/chapter_4/chapter_4.md",
-          "./lib/chapter_5/chapter_5.md",
-          "./lib/chapter_6/chapter_6.md",
-          "./lib/chapter_7/chapter_7.md",
-          "./lib/chapter_8/chapter_8.md",
-          "./lib/chapter_9/chapter_9.md"
+          "./lib/chapters/chapter_1/chapter_1.md",
+          "./lib/chapters/chapter_2/chapter_2.md",
+          "./lib/chapters/chapter_3/chapter_3.md",
+          "./lib/chapters/chapter_4/chapter_4.md",
+          "./lib/chapters/chapter_5/chapter_5.md",
+          "./lib/chapters/chapter_6/chapter_6.md",
+          "./lib/chapters/chapter_7/chapter_7.md",
+          "./lib/chapters/chapter_8/chapter_8.md",
+          "./lib/chapters/chapter_9/chapter_9.md",
+          "./lib/chapters/chapter_10/chapter_10.md"
         ],
         groups_for_modules: [
           "Chapter 2": [Chapter2.Calculator, Chapter2.Generic, Chapter2.Geometry],
@@ -45,7 +46,9 @@ defmodule Generic.MixProject do
             Chapter6.MyStackServer,
             Chapter6.KeyValueStore
           ],
-          "Chapter 9": [Chapter9.EchoServer]
+          "Chapter 9": [Chapter9.EchoServer],
+          "Chapter 10": [Chapter10.QueryHelper, Chapter10.SimpleRegistry, Chapter10.EtsKeyValue, Chapter10.KeyValueStore]
+
         ]
       ]
     ]
