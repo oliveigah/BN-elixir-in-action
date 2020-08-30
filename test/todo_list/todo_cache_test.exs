@@ -10,9 +10,9 @@ defmodule Todo.CacheTest do
   end
 
   test "to-do operations" do
-    Todo.Cache.server_process("bob")
-    Todo.Server.add_entry("bob", Todo.Entry.new(~D[1995-09-12], "Bob's birthday"))
-    entries = Todo.Server.entries("bob", ~D[1995-09-12])
+    pid = Todo.Cache.server_process("bob")
+    Todo.Server.add_entry(pid, Todo.Entry.new(~D[1995-09-12], "Bob's birthday"))
+    entries = Todo.Server.entries(pid, ~D[1995-09-12])
 
     assert [%Todo.Entry{date: ~D[1995-09-12], description: "Bob's birthday"}] = entries
   end

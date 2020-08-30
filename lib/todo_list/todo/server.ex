@@ -1,16 +1,15 @@
 defmodule Todo.Server do
   use GenServer, restart: :temporary
 
-  @idle_timeout :timer.seconds(10)
-
-  @spec start(String.t()) :: :ignore | {:error, any} | {:ok, pid}
-  def start(todo_list_name) do
-    GenServer.start(Todo.Server, todo_list_name)
-  end
+  @idle_timeout :timer.seconds(240)
 
   @spec start_link(String.t()) :: :ignore | {:error, any} | {:ok, pid}
   def start_link(todo_list_name) do
     GenServer.start_link(Todo.Server, todo_list_name, name: via_tuple(todo_list_name))
+  end
+
+  defp persist(list_name, todo_list) do
+    Todo.Database.store(list_name, todo_list)
   end
 
   defp via_tuple(todo_list_name) do
@@ -33,29 +32,29 @@ defmodule Todo.Server do
     {:stop, :normal, {list_name, todo_list}}
   end
 
-  @spec add_entry(String.t(), Todo.Entry.t()) :: any
-  def add_entry(todo_list_name, %Todo.Entry{} = entry) do
-    GenServer.cast(via_tuple(todo_list_name), {:add_entry, entry})
+  @spec add_entry(pid, Todo.Entry.t()) :: any
+  def add_entry(server, %Todo.Entry{} = entry) do
+    GenServer.cast(server, {:add_entry, entry})
   end
 
-  @spec entries(String.t(), Date.t()) :: [Todo.Entry.t()]
-  def entries(todo_list_name, date) do
-    GenServer.call(via_tuple(todo_list_name), {:get_entries, date})
+  @spec entries(pid, Date.t()) :: [Todo.Entry.t()]
+  def entries(server, date) do
+    GenServer.call(server, {:get_entries, date})
   end
 
-  @spec update_entry(String.t(), Todo.Entry.t()) :: any()
-  def update_entry(todo_list_name, %Todo.Entry{} = new_entry) do
-    GenServer.cast(via_tuple(todo_list_name), {:update_entry, new_entry})
+  @spec update_entry(pid, Todo.Entry.t()) :: any()
+  def update_entry(server, %Todo.Entry{} = new_entry) do
+    GenServer.cast(server, {:update_entry, new_entry})
   end
 
-  @spec update_entry(String.t(), number(), fun()) :: any()
-  def update_entry(todo_list_name, entry_id, update_fun) do
-    GenServer.cast(via_tuple(todo_list_name), {:update_entry, entry_id, update_fun})
+  @spec update_entry(pid, number(), fun()) :: any()
+  def update_entry(server, entry_id, update_fun) do
+    GenServer.cast(server, {:update_entry, entry_id, update_fun})
   end
 
-  @spec delete_entry(String.t(), number()) :: any
-  def delete_entry(todo_list_name, entry_id) do
-    GenServer.cast(via_tuple(todo_list_name), {:delete_entry, entry_id})
+  @spec delete_entry(pid, number()) :: any
+  def delete_entry(server, entry_id) do
+    GenServer.cast(server, {:delete_entry, entry_id})
   end
 
   @impl GenServer
@@ -66,25 +65,25 @@ defmodule Todo.Server do
   @impl GenServer
   def handle_cast({:add_entry, %Todo.Entry{} = entry}, {list_name, todo_list}) do
     new_list = Todo.List.add_entry(todo_list, entry)
-    Todo.Database.store(list_name, new_list)
+    persist(list_name, new_list)
     {:noreply, {list_name, new_list}, @idle_timeout}
   end
 
   def handle_cast({:update_entry, new_entry}, {list_name, todo_list}) do
     new_list = Todo.List.update_entry(todo_list, new_entry)
-    Todo.Database.store(list_name, new_list)
+    persist(list_name, new_list)
     {:noreply, {list_name, new_list}, @idle_timeout}
   end
 
   def handle_cast({:update_entry, entry_id, update_fun}, {list_name, todo_list}) do
     new_list = Todo.List.update_entry(todo_list, entry_id, update_fun)
-    Todo.Database.store(list_name, new_list)
+    persist(list_name, new_list)
     {:noreply, {list_name, new_list}, @idle_timeout}
   end
 
   def handle_cast({:delete_entry, entry_id}, {list_name, todo_list}) do
     new_list = Todo.List.delete_entry(todo_list, entry_id)
-    Todo.Database.store(list_name, new_list)
+    persist(list_name, new_list)
     {:noreply, {list_name, new_list}, @idle_timeout}
   end
 end

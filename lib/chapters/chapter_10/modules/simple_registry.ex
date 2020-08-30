@@ -6,6 +6,7 @@ defmodule Chapter10.SimpleRegistry do
       __MODULE__,
       [:named_table, :public, write_concurrency: true]
     )
+
     Process.flag(:trap_exit, true)
     {:ok, nil}
   end

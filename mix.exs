@@ -1,18 +1,18 @@
-defmodule Generic.MixProject do
+defmodule ElixirInAction.MixProject do
   use Mix.Project
 
   def project do
     [
       app: :elixir_in_action,
-      version: "0.0.8",
+      version: "0.1.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
 
       # Docs
       name: "Elixir In Action",
-      source_url: "https://github.com/oliveigah/elixir_in_action",
-      homepage_url: "https://techfromscratch.com.br/elixir_in_action",
+      source_url: "https://github.com/oliveigah/BN-elixir-in-action",
+      homepage_url: "https://techfromscratch.com.br/book_notes/elixir_in_action",
       docs: [
         # The main page in the docs
         main: "chapter_1",
@@ -27,7 +27,8 @@ defmodule Generic.MixProject do
           "./lib/chapters/chapter_7/chapter_7.md",
           "./lib/chapters/chapter_8/chapter_8.md",
           "./lib/chapters/chapter_9/chapter_9.md",
-          "./lib/chapters/chapter_10/chapter_10.md"
+          "./lib/chapters/chapter_10/chapter_10.md",
+          "./lib/chapters/chapter_11/chapter_11.md"
         ],
         groups_for_modules: [
           "Chapter 2": [Chapter2.Calculator, Chapter2.Generic, Chapter2.Geometry],
@@ -47,8 +48,27 @@ defmodule Generic.MixProject do
             Chapter6.KeyValueStore
           ],
           "Chapter 9": [Chapter9.EchoServer],
-          "Chapter 10": [Chapter10.QueryHelper, Chapter10.SimpleRegistry, Chapter10.EtsKeyValue, Chapter10.KeyValueStore]
-
+          "Chapter 10": [
+            Chapter10.QueryHelper,
+            Chapter10.SimpleRegistry,
+            Chapter10.EtsKeyValue,
+            Chapter10.KeyValueStore,
+            Chapter10.Bench
+          ],
+          "Todo List Project": [
+            Todo.Application,
+            Todo.Cache,
+            Todo.Database,
+            Todo.Entry,
+            Todo.List,
+            Todo.Metrics,
+            Todo.ProcessRegistry,
+            Todo.Server,
+            Todo.System,
+            Todo.Web,
+            Database.Worker,
+            Todo.List.CsvImporter
+          ]
         ]
       ]
     ]
@@ -57,7 +77,8 @@ defmodule Generic.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger],
+      mod: {Todo.Application, []}
     ]
   end
 
@@ -66,7 +87,10 @@ defmodule Generic.MixProject do
     [
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
-      {:ex_doc, "~> 0.22", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false},
+      {:poolboy, "~> 1.5"},
+      {:cowboy, "~> 2.8"},
+      {:plug_cowboy, "~> 2.3"}
     ]
   end
 end

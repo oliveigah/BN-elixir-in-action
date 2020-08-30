@@ -11,6 +11,7 @@ defmodule Todo.List do
   def new(entries) do
     Enum.reduce(entries, %Todo.List{}, &add_entry(&2, &1))
   end
+
   @spec add_entry(Todo.List.t(), Todo.Entry.t()) :: Todo.List.t()
   def add_entry(todo_list, %Todo.Entry{} = new_entry) do
     entry = Map.put(new_entry, :id, todo_list.auto_id)

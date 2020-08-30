@@ -6,7 +6,7 @@ defmodule Todo.Metrics do
   end
 
   def loop do
-    Process.sleep(:timer.seconds(10))
+    Process.sleep(:timer.seconds(60))
     Todo.Database.store("metrics", collect_metrics())
     loop()
   end

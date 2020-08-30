@@ -1,5 +1,6 @@
 defmodule Chapter10.EtsKeyValue do
   use GenServer
+
   @moduledoc """
     This module explains how to use ETS table as a key/value store
 
