@@ -7,7 +7,7 @@ defmodule Todo.Web do
   def child_spec(_) do
     Plug.Adapters.Cowboy.child_spec(
       scheme: :http,
-      options: [port: 5454],
+      options: [port: Application.get_env(:elixir_in_action, :todo_list_http_port)],
       plug: __MODULE__
     )
   end

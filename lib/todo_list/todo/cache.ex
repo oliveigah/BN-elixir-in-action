@@ -21,6 +21,15 @@ defmodule Todo.Cache do
   end
 
   def server_process(todo_list_name) do
+    :rpc.call(
+      Todo.Server.find_node(todo_list_name),
+      __MODULE__,
+      :run_server_process,
+      [todo_list_name]
+    )
+  end
+
+  def run_server_process(todo_list_name) do
     case start_child(todo_list_name) do
       {:ok, pid} -> pid
       {:error, {:already_started, pid}} -> pid

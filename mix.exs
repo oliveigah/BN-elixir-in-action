@@ -28,7 +28,8 @@ defmodule ElixirInAction.MixProject do
           "./lib/chapters/chapter_8/chapter_8.md",
           "./lib/chapters/chapter_9/chapter_9.md",
           "./lib/chapters/chapter_10/chapter_10.md",
-          "./lib/chapters/chapter_11/chapter_11.md"
+          "./lib/chapters/chapter_11/chapter_11.md",
+          "./lib/chapters/chapter_12/chapter_12.md"
         ],
         groups_for_modules: [
           "Chapter 2": [Chapter2.Calculator, Chapter2.Generic, Chapter2.Geometry],

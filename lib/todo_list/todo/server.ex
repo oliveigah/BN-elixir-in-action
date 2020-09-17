@@ -22,6 +22,18 @@ defmodule Todo.Server do
     {:ok, nil}
   end
 
+  def find_node(list_name) do
+    nodes = Enum.sort(Node.list([:this, :visible]))
+
+    node_index =
+      :erlang.phash2(
+        list_name,
+        length(nodes)
+      )
+
+    Enum.at(nodes, node_index)
+  end
+
   @impl GenServer
   def handle_info({:real_init, list_name}, _state) do
     {:noreply, {list_name, Todo.Database.get(list_name) || Todo.List.new()}, @idle_timeout}
