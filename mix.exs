@@ -12,7 +12,7 @@ defmodule ElixirInAction.MixProject do
       # Docs
       name: "Elixir In Action",
       source_url: "https://github.com/oliveigah/BN-elixir-in-action",
-      homepage_url: "https://techfromscratch.com.br/book_notes/elixir_in_action",
+      homepage_url: "https://techfromscratch.com.br/book-notes/elixir-in-action",
       docs: [
         # The main page in the docs
         main: "chapter_1",
